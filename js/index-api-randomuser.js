@@ -8,7 +8,6 @@ $.ajax({
   url: 'https://randomuser.me/api/',
   dataType: 'json',
   success: function(data) {
-    console.log(data);
     src = data.results[0].picture.large;
     imageClienteRandomUser.setAttribute("src",src);
     nombreClienteRandomUser.textContent = data.results[0].name.first;
