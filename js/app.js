@@ -393,10 +393,23 @@ btnRealizarPago.addEventListener("click", function() {
 })
 
 linkBuscar.addEventListener("click", function() {
-  localStorage.removeItem("arrayProductoBuscados");
-  arrayProductoBuscado = productos.filter((producto) => producto.nombre == ((inputProducto.value).trim()).toLowerCase());
-  if (arrayProductoBuscado.length > 0) {
-    localStorage.setItem("arrayProductoBuscados", JSON.stringify( arrayProductoBuscado));
+
+  let rutaArchivoSearch = "./pages/search.html";
+  if (inputProducto.value !="") {
+    if (tituloPrincipal.textContent == "ROSE TIENDA DE ROPA") {
+      linkBuscar.href = rutaArchivoSearch;
+    } else {
+      linkBuscar.href = rutaArchivoSearch.replace("./","../");
+    }
+    localStorage.removeItem("arrayProductoBuscados");
+    arrayProductoBuscado = productos.filter((producto) => producto.nombre == ((inputProducto.value).trim()).toLowerCase());
+    if(arrayProductoBuscado.length > 0){
+      localStorage.setItem("arrayProductoBuscados", JSON.stringify( arrayProductoBuscado));
+    } else {
+      inputProducto.placeHolder = "No puede estar vacío"
+    }
+  } else {
+    inputProducto.setAttribute("placeholder","*No puede estar vacío");
   }
 })
 
